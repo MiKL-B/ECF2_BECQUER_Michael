@@ -74,6 +74,8 @@ FOR EACH ROW EXECUTE PROCEDURE verif_ca();
 --
 --table projet
 -- Ne pas supprimer un projet si la date réelle de fin du projet est inférieure à 2 mois par rapport à la date du jour.
+-- IF NEW.date_reelle_fin > 2mois par rapport date du jour
+-- delete
 --
 --[PROCEDURES]
 --
