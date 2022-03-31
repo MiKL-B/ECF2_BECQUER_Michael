@@ -1,16 +1,16 @@
 --script de création
 --drop des tables 
+drop table if exists intervient cascade;
 drop table if exists contact_projet cascade;
 drop table if exists a_des_infos cascade;
-drop table if exists a_une_fonction cascade;
 drop table if exists langage_developpement cascade;
 drop table if exists information_technique cascade;
+drop table if exists collaborateur cascade;
 drop table if exists document_associe cascade;
 drop table if exists retour_experience cascade;
+drop table if exists client cascade;
 drop table if exists projet cascade;
 drop table if exists activite cascade;
-drop table if exists collaborateur cascade;
-drop table if exists client cascade;
 drop table if exists raison_sociale_client cascade;
 drop table if exists liste_activite cascade;
 drop table if exists information_commerciale cascade;
@@ -107,47 +107,6 @@ CREATE TABLE raison_sociale_client(
    PRIMARY KEY(Id_raison_sociale_client)
 );
 
-CREATE TABLE client(
-   Id_client SERIAL,
-   num_client VARCHAR(4) ,
-   adresse_client VARCHAR(100) ,
-   telephone VARCHAR(10) ,
-   CA INTEGER,
-   commentaire VARCHAR(100) ,
-   Id_raison_sociale_client INTEGER NOT NULL,
-   Id_nature INTEGER,
-   Id_domaine_activite INTEGER NOT NULL,
-   Id_type_client INTEGER NOT NULL,
-   PRIMARY KEY(Id_client),
-   FOREIGN KEY(Id_raison_sociale_client) REFERENCES raison_sociale_client(Id_raison_sociale_client),
-   FOREIGN KEY(Id_nature) REFERENCES nature(Id_nature),
-   FOREIGN KEY(Id_domaine_activite) REFERENCES domaine_activite(Id_domaine_activite),
-   FOREIGN KEY(Id_type_client) REFERENCES type_client(Id_type_client)
-);
-
-CREATE TABLE collaborateur(
-   Id_collaborateur SERIAL,
-   matricule VARCHAR(4) ,
-   nom_prenom VARCHAR(40) ,
-   adresse1 VARCHAR(25) ,
-   adresse2 VARCHAR(25) ,
-   ville VARCHAR(40) ,
-   codePostal VARCHAR(5) ,
-   telephone VARCHAR(10) ,
-   remuneration NUMERIC(15,2)  ,
-   date_embauche DATE,
-   date_fin_contrat DATE,
-   Id_client INTEGER,
-   Id_etat_civil INTEGER NOT NULL,
-   Id_sexe INTEGER NOT NULL,
-   Id_statut INTEGER NOT NULL,
-   PRIMARY KEY(Id_collaborateur),
-   FOREIGN KEY(Id_client) REFERENCES client(Id_client),
-   FOREIGN KEY(Id_etat_civil) REFERENCES etat_civil(Id_etat_civil),
-   FOREIGN KEY(Id_sexe) REFERENCES sexe(Id_sexe),
-   FOREIGN KEY(Id_statut) REFERENCES statut(Id_statut)
-);
-
 CREATE TABLE activite(
    Id_activite SERIAL,
    charge_production INTEGER,
@@ -156,10 +115,8 @@ CREATE TABLE activite(
    date_fin_intervention DATE,
    type_intervention VARCHAR(50) ,
    Id_liste_activite INTEGER,
-   Id_collaborateur INTEGER,
    PRIMARY KEY(Id_activite),
-   FOREIGN KEY(Id_liste_activite) REFERENCES liste_activite(Id_liste_activite),
-   FOREIGN KEY(Id_collaborateur) REFERENCES collaborateur(Id_collaborateur)
+   FOREIGN KEY(Id_liste_activite) REFERENCES liste_activite(Id_liste_activite)
 );
 
 CREATE TABLE projet(
@@ -185,6 +142,24 @@ CREATE TABLE projet(
    FOREIGN KEY(Id_secteur_activite) REFERENCES secteur_activite(Id_secteur_activite)
 );
 
+CREATE TABLE client(
+   Id_client SERIAL,
+   num_client VARCHAR(4) ,
+   adresse_client VARCHAR(100) ,
+   telephone VARCHAR(10) ,
+   CA INTEGER,
+   commentaire VARCHAR(100) ,
+   Id_raison_sociale_client INTEGER NOT NULL,
+   Id_nature INTEGER,
+   Id_domaine_activite INTEGER NOT NULL,
+   Id_type_client INTEGER NOT NULL,
+   PRIMARY KEY(Id_client),
+   FOREIGN KEY(Id_raison_sociale_client) REFERENCES raison_sociale_client(Id_raison_sociale_client),
+   FOREIGN KEY(Id_nature) REFERENCES nature(Id_nature),
+   FOREIGN KEY(Id_domaine_activite) REFERENCES domaine_activite(Id_domaine_activite),
+   FOREIGN KEY(Id_type_client) REFERENCES type_client(Id_type_client)
+);
+
 CREATE TABLE retour_experience(
    Id_retour_experience SERIAL,
    nom_retour_experience VARCHAR(50) ,
@@ -201,6 +176,31 @@ CREATE TABLE document_associe(
    Id_projet INTEGER,
    PRIMARY KEY(Id_document_associe),
    FOREIGN KEY(Id_projet) REFERENCES projet(Id_projet)
+);
+
+CREATE TABLE collaborateur(
+   Id_collaborateur SERIAL,
+   matricule VARCHAR(4) ,
+   nom_prenom VARCHAR(40) ,
+   adresse1 VARCHAR(25) ,
+   adresse2 VARCHAR(25) ,
+   ville VARCHAR(40) ,
+   codePostal VARCHAR(5) ,
+   telephone VARCHAR(10) ,
+   remuneration NUMERIC(15,2)  ,
+   date_embauche DATE,
+   date_fin_contrat DATE,
+   Id_client INTEGER,
+   Id_etat_civil INTEGER NOT NULL,
+   Id_sexe INTEGER NOT NULL,
+   Id_statut INTEGER NOT NULL,
+   Id_fonction INTEGER NOT NULL,
+   PRIMARY KEY(Id_collaborateur),
+   FOREIGN KEY(Id_client) REFERENCES client(Id_client),
+   FOREIGN KEY(Id_etat_civil) REFERENCES etat_civil(Id_etat_civil),
+   FOREIGN KEY(Id_sexe) REFERENCES sexe(Id_sexe),
+   FOREIGN KEY(Id_statut) REFERENCES statut(Id_statut),
+   FOREIGN KEY(Id_fonction) REFERENCES fonction(Id_fonction)
 );
 
 CREATE TABLE information_technique(
@@ -221,14 +221,6 @@ CREATE TABLE langage_developpement(
    FOREIGN KEY(Id_information_technique) REFERENCES information_technique(Id_information_technique)
 );
 
-CREATE TABLE a_une_fonction(
-   Id_collaborateur INTEGER,
-   Id_fonction INTEGER,
-   PRIMARY KEY(Id_collaborateur, Id_fonction),
-   FOREIGN KEY(Id_collaborateur) REFERENCES collaborateur(Id_collaborateur),
-   FOREIGN KEY(Id_fonction) REFERENCES fonction(Id_fonction)
-);
-
 CREATE TABLE a_des_infos(
    Id_projet INTEGER,
    Id_information_commerciale INTEGER,
@@ -246,4 +238,14 @@ CREATE TABLE contact_projet(
    PRIMARY KEY(Id_projet, Id_client),
    FOREIGN KEY(Id_projet) REFERENCES projet(Id_projet),
    FOREIGN KEY(Id_client) REFERENCES client(Id_client)
+);
+
+CREATE TABLE intervient(
+   Id_collaborateur INTEGER,
+   Id_fonction INTEGER,
+   Id_activite INTEGER,
+   PRIMARY KEY(Id_collaborateur, Id_fonction, Id_activite),
+   FOREIGN KEY(Id_collaborateur) REFERENCES collaborateur(Id_collaborateur),
+   FOREIGN KEY(Id_fonction) REFERENCES fonction(Id_fonction),
+   FOREIGN KEY(Id_activite) REFERENCES activite(Id_activite)
 );
