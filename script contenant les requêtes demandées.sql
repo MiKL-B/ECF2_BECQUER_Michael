@@ -6,7 +6,9 @@
  select libelle_court, nom_secteur_activite from projet inner join secteur_activite on projet.id_secteur_activite = secteur_activite.id_secteur_activite;
 --Requête 2  On souhaite obtenir la liste des projets (libellé court) sur lesquels un collaborateur est intervenu.
 --Préciser également sa fonction dans les projets.
-select nom_prenom,libelle_court,nom_fonction from projet inner join activite on projet.id_projet = activite.id_projet inner join intervention on activite.id_activite = intervention.id_activite inner join collaborateur on intervention.id_collaborateur = collaborateur.id_collaborateur inner join fonction on collaborateur.id_fonction = fonction.id_fonction;
+select libelle_court,nom_activite from projet 
+inner join activite on projet.id_activite = activite.id_activite 
+inner join liste_activite on activite.id_liste_activite = liste_activite.id_liste_activite
 --
 --Requête 3 On souhaite obtenir à la date du jour la liste des projets en cours, par secteur d’activité.
 --Préciser le nombre de collaborateurs associés aux projets et ceci par fonction.

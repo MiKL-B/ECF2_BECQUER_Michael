@@ -75,3 +75,28 @@ INSERT INTO secteur_activite(nom_secteur_activite) VALUES ('gestion commercial')
 INSERT INTO secteur_activite(nom_secteur_activite) VALUES ('RH');
 INSERT INTO secteur_activite(nom_secteur_activite) VALUES ('production');
 INSERT INTO secteur_activite(nom_secteur_activite) VALUES ('achat');
+
+--collaborateur
+INSERT INTO collaborateur (nom_prenom,remuneration,id_etat_civil,id_sexe,id_statut) VALUES('michel',2000,1,1,1);
+INSERT INTO collaborateur (nom_prenom,remuneration,id_etat_civil,id_sexe,id_statut) VALUES('paul',1000,1,1,1);
+INSERT INTO collaborateur (nom_prenom,remuneration,id_etat_civil,id_sexe,id_statut) VALUES('jean',1200,1,1,1);
+INSERT INTO collaborateur (nom_prenom,remuneration,id_etat_civil,id_sexe,id_statut) VALUES('edouart',2400,1,1,1);
+INSERT INTO collaborateur (nom_prenom,remuneration,id_etat_civil,id_sexe,id_statut) VALUES('pierre',3000,1,1,1);
+--a_une_fonction
+INSERT INTO a_une_fonction(id_collaborateur,id_fonction) VALUES(1,1);
+INSERT INTO a_une_fonction(id_collaborateur,id_fonction) VALUES(1,2);
+INSERT INTO a_une_fonction(id_collaborateur,id_fonction) VALUES(1,3);
+INSERT INTO a_une_fonction(id_collaborateur,id_fonction) VALUES(2,1);
+INSERT INTO a_une_fonction(id_collaborateur,id_fonction) VALUES(2,2);
+INSERT INTO a_une_fonction(id_collaborateur,id_fonction) VALUES(3,3);
+INSERT INTO a_une_fonction(id_collaborateur,id_fonction) VALUES(4,3);
+INSERT INTO a_une_fonction(id_collaborateur,id_fonction) VALUES(5,3);
+
+--activite
+INSERT INTO activite(date_debut_intervention,date_fin_intervention,type_intervention,id_liste_activite,id_collaborateur)
+VALUES ('02/02/2012','04/04/2014','dépannage',1,1);
+INSERT INTO activite(date_debut_intervention,date_fin_intervention,type_intervention,id_liste_activite,id_collaborateur)
+VALUES ('10/03/2013','03/09/2016','autre',2,1);
+--projet
+INSERT INTO projet(libelle_court,id_activite,id_secteur_activite) VALUES ('premier',1,1);
+INSERT INTO projet(libelle_court,id_activite,id_secteur_activite) VALUES ('deux',2,1);
