@@ -70,12 +70,44 @@ FOR EACH ROW EXECUTE PROCEDURE verif_ca();
 -- - S (stagiaire) à D (CDD) ou I (CDI),
 -- - D (CDD) à I (CDI).
 --
+-- 3 --> 2 --> ou 1
+-- 2 --> 1
+--TODO
+drop trigger if exists coherence_statut on collaborateur cascade;
+CREATE OR REPLACE FUNCTION coherence_statut()
+RETURNS TRIGGER AS 
+$$
+DECLARE
+BEGIN
+UPDATE collaborateur 
+SET id_statut = NEW.id_statut WHERE id_statut = OLD.id_statut;
+RETURN OLD;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER coherence_statut AFTER UPDATE ON collaborateur
+FOR EACH ROW EXECUTE PROCEDURE coherence_statut();
+
 --Triggers de suppresion
 --
 --table projet
 -- Ne pas supprimer un projet si la date réelle de fin du projet est inférieure à 2 mois par rapport à la date du jour.
 -- IF NEW.date_reelle_fin > 2mois par rapport date du jour
 -- delete
+--current_date 
+--current_timestamp pour date et heure
+drop trigger if exists delete_projet on projet cascade;
+CREATE OR REPLACE FUNCTION delete_projet()
+RETURNS TRIGGER AS 
+$$
+BEGIN
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER delete_projet AFTER DELETE ON projet
+FOR EACH ROW EXECUTE PROCEDURE delete_projet();
 --
 --[PROCEDURES]
 --
