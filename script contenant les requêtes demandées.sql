@@ -4,34 +4,42 @@
 --TODO
 --Requête 1 On souhaite obtenir par secteur d’activité la moyenne des charges estimées des projets.
 --
- select libelle_court, nom_secteur_activite from projet inner join secteur_activite on projet.id_secteur_activite = secteur_activite.id_secteur_activite;
+ select libelle_court, nom_secteur_activite from projet 
+ inner join secteur_activite on projet.id_secteur_activite = secteur_activite.id_secteur_activite;
 /* -------------------------------------------------------------------------- */
 /*                                    GOOD                                    */
 /* -------------------------------------------------------------------------- */
 --Requête 2  On souhaite obtenir la liste des projets (libellé court) sur lesquels un collaborateur est intervenu.
 --Préciser également sa fonction dans les projets.
+
+--
+--v-2
 select libelle_court, nom_fonction from projet 
-inner join activite on projet.id_activite = activite.id_activite 
+inner join activite on projet.id_projet = activite.id_projet 
 inner join intervient on activite.id_activite = intervient.id_activite 
 inner join fonction on intervient.id_fonction = fonction.id_fonction;
 --
 --TODO a revoir  mcd resultat en double
 --Requête 3 On souhaite obtenir à la date du jour la liste des projets en cours, par secteur d’activité.
 --Préciser le nombre de collaborateurs associés aux projets et ceci par fonction.
+
+--v-2
 SELECT current_date,libelle_court,nb_collab_max,nom_fonction,nom_secteur_activite from intervient
 inner join fonction on intervient.id_fonction = fonction.id_fonction
 inner join activite on intervient.id_activite = activite.id_activite
-inner join projet on activite.id_activite = projet.id_activite
+inner join projet on activite.id_projet = projet.id_projet
 inner join secteur_activite on projet.id_secteur_activite = secteur_activite.id_secteur_activite
 WHERE date_reelle_fin IS NULL;
 --
-
+/* -------------------------------------------------------------------------- */
+/*                                    GOOD                                    */
+/* -------------------------------------------------------------------------- */
 --Requêtes de mise a jour
 -- - Augmenter tous les salaires des collaborateurs de  5% si ils ont plus de 5 ans d’ancienneté.
 UPDATE collaborateur SET remuneration = remuneration * 1.05 WHERE extract(year from current_date) -  extract(year from date_embauche) > 5;
 -- - Supprimer de la base de données les projets qui sont terminés et qui n’ont pas eu de charges (étapes) associées.
-DELETE FROM projet WHERE id_activite IS null AND date_reelle_fin IS NOT null;
-
+--delete-v-2
+DELETE FROM projet WHERE   date_reelle_fin IS NOT NULL;
 --[TRIGGERS]
 --
 --Triggers de création
@@ -65,7 +73,6 @@ CREATE TRIGGER verif_date BEFORE INSERT OR UPDATE ON projet
 --table client
 --Vérifier la cohérence du chiffre d’affaire du client, si supérieur à 1 million d’euros par personne la valeur du CA est erronée.
 --
-
 drop trigger if exists verif_ca on client cascade;
 CREATE OR REPLACE FUNCTION verif_ca() RETURNS trigger AS
 $$
@@ -151,6 +158,6 @@ SELECT libelle_court,date_reelle_fin from projet  where extract(year from curren
 
 select nom_prenom, nom_fonction, date_debut_intervention, date_fin_intervention, nom_activite from intervient
 inner join collaborateur on intervient.id_collaborateur = collaborateur.id_collaborateur
-inner join fonction on intervient.id_fonction = fonction.id_fonction
+inner join fonction on collaborateur.id_fonction = fonction.id_fonction
 inner join activite on intervient.id_activite = activite.id_activite
 inner join liste_activite on activite.id_liste_activite = activite.id_liste_activite;

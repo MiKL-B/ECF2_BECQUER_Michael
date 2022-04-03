@@ -80,26 +80,23 @@ INSERT INTO secteur_activite(nom_secteur_activite) VALUES ('achat');
 INSERT INTO collaborateur (nom_prenom,remuneration,id_etat_civil,id_sexe,id_statut,id_fonction) VALUES('michel',2000,1,1,1,1);
 INSERT INTO collaborateur(nom_prenom,remuneration,id_etat_civil,id_sexe,id_statut,id_fonction,date_embauche)
 VALUES ('michmich',2000,1,1,1,1,'02/02/2000');
---activite
-INSERT INTO activite(date_debut_intervention,date_fin_intervention,type_intervention,id_liste_activite)
-VALUES ('02/02/2012','04/04/2014','dépannage',1);
-INSERT INTO activite(date_debut_intervention,date_fin_intervention,type_intervention,id_liste_activite)
-VALUES ('10/03/2013','03/09/2016','autre',2);
---projet
-INSERT INTO projet(libelle_court,id_activite,id_secteur_activite) VALUES ('premier',1,1);
-INSERT INTO projet(libelle_court,id_activite,id_secteur_activite) VALUES ('deux',2,1);
-INSERT INTO projet(libelle_court,id_activite,id_secteur_activite,date_prevue_debut,date_prevue_fin) 
-VALUES ('test',1,1,'02/02/2010','03/03/2018');
-INSERT INTO projet(libelle_court,id_secteur_activite,date_prevue_debut,date_reelle_fin) 
-VALUES ('pro',1,'03/03/2018','04/04/2020');
---intervient
-INSERT INTO intervient(id_collaborateur, id_fonction,id_activite) VALUES (1,2,1);
-INSERT INTO intervient(id_collaborateur, id_fonction,id_activite) VALUES (1,3,1);
-INSERT INTO intervient(id_collaborateur, id_fonction,id_activite) VALUES (1,4,1);
+--activite-v-2
+INSERT INTO activite(id_liste_activite,id_projet)
+VALUES (1,2);
+
+--projet-v-2
+INSERT INTO projet(libelle_court,id_secteur_activite,date_prevue_debut,date_prevue_fin,id_cycle_vie_projet,id_type_projet)
+VALUES ('test',1,'02/02/2019','03/03/2018',1,1);
+INSERT INTO projet(libelle_court,id_secteur_activite,date_reelle_fin,id_cycle_vie_projet,id_type_projet) 
+VALUES ('pro',1,'04/04/2020',1,1);
+
+--intervient-v-2
+INSERT INTO intervient(id_collaborateur, id_fonction,id_activite,date_debut_intervention,date_fin_intervention) VALUES (1,2,3,'02/02/2020','03/03/2022');
+INSERT INTO intervient(id_collaborateur, id_fonction,id_activite,date_debut_intervention,date_fin_intervention) VALUES (1,2,3,'04/03/2018','04/05/2019');
 --client
-INSERT INTO client(num_client,id_type_client,id_raison_sociale_client,id_domaine_activite,CA) 
-VALUES ('test',1,1,1,1000);
-INSERT INTO client(num_client,id_type_client,id_raison_sociale_client,id_domaine_activite,CA) 
-VALUES ('test',1,1,1,1000000);
-INSERT INTO client(num_client,id_type_client,id_raison_sociale_client,id_domaine_activite,CA) 
-VALUES ('test',1,1,1,1000001);
+INSERT INTO client(num_client,id_type_client,id_raison_sociale_client,id_domaine_activite,CA,id_projet,id_nature) 
+VALUES ('test',1,1,1,1000,2,1);
+INSERT INTO client(num_client,id_type_client,id_raison_sociale_client,id_domaine_activite,CA,id_projet,id_nature) 
+VALUES ('test',1,1,1,1000000,2,1);
+INSERT INTO client(num_client,id_type_client,id_raison_sociale_client,id_domaine_activite,CA,id_projet,id_nature) 
+VALUES ('test',1,1,1,1000001,2,1);
