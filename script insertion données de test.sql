@@ -78,7 +78,8 @@ INSERT INTO secteur_activite(nom_secteur_activite) VALUES ('achat');
 
 --collaborateur
 INSERT INTO collaborateur (nom_prenom,remuneration,id_etat_civil,id_sexe,id_statut,id_fonction) VALUES('michel',2000,1,1,1,1);
-
+INSERT INTO collaborateur(nom_prenom,remuneration,id_etat_civil,id_sexe,id_statut,id_fonction,date_embauche)
+VALUES ('michmich',2000,1,1,1,1,'02/02/2000');
 --activite
 INSERT INTO activite(date_debut_intervention,date_fin_intervention,type_intervention,id_liste_activite)
 VALUES ('02/02/2012','04/04/2014','dépannage',1);
@@ -88,7 +89,9 @@ VALUES ('10/03/2013','03/09/2016','autre',2);
 INSERT INTO projet(libelle_court,id_activite,id_secteur_activite) VALUES ('premier',1,1);
 INSERT INTO projet(libelle_court,id_activite,id_secteur_activite) VALUES ('deux',2,1);
 INSERT INTO projet(libelle_court,id_activite,id_secteur_activite,date_prevue_debut,date_prevue_fin) 
-VALUES ('test',1,1,'02/02/2020','03/03/2018');
+VALUES ('test',1,1,'02/02/2010','03/03/2018');
+INSERT INTO projet(libelle_court,id_secteur_activite,date_prevue_debut,date_reelle_fin) 
+VALUES ('pro',1,'03/03/2018','04/04/2020');
 --intervient
 INSERT INTO intervient(id_collaborateur, id_fonction,id_activite) VALUES (1,2,1);
 INSERT INTO intervient(id_collaborateur, id_fonction,id_activite) VALUES (1,3,1);
