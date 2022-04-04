@@ -9,7 +9,8 @@ CREATE OR REPLACE FUNCTION delete_projet()
 RETURNS TRIGGER AS 
 $$
 BEGIN
-IF OLD.date_reelle_fin::date - current_date::date < 2 THEN
+--IF OLD.date_reelle_fin::date - current_date::date < 2 THEN
+IF extract(month from OLD.date_reelle_fin) - extract(month from current_date) > 2 THEN
 RAISE EXCEPTION 'ERROR proj inf a 2 mois';
 END IF;
 return OLD;
@@ -20,3 +21,4 @@ LANGUAGE plpgsql;
 CREATE TRIGGER delete_projet BEFORE DELETE ON projet
 FOR EACH ROW EXECUTE PROCEDURE delete_projet();
 
+ select extract(month from date_reelle_fin), extract(month from current_date) from projet;

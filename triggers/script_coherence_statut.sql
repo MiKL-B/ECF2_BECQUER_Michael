@@ -17,9 +17,8 @@ RETURNS TRIGGER AS
 $$
 DECLARE
 BEGIN
-IF (select id_statut from collaborateur = 3) THEN
-    UPDATE collaborateur 
-    SET  = NEW.id_statut;
+IF (OLD.id_statut = 1 AND NEW.id_statut = 2 OR OLD.id_statut = 2 AND NEW.id_statut = 3) THEN
+  RAISE EXCEPTION 'ERROR on ne peut pas retrograder un collaborateur';
 END IF;
 
 RETURN NEW;
