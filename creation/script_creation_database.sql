@@ -163,7 +163,7 @@ CREATE TABLE client(
    Id_type_client INTEGER NOT NULL,
    PRIMARY KEY(Id_client),
    FOREIGN KEY(Id_raison_sociale_client) REFERENCES raison_sociale_client(Id_raison_sociale_client),
-   FOREIGN KEY(Id_projet) REFERENCES projet(Id_projet),
+   FOREIGN KEY(Id_projet) REFERENCES projet(Id_projet) ON DELETE CASCADE,
    FOREIGN KEY(Id_nature) REFERENCES nature(Id_nature),
    FOREIGN KEY(Id_domaine_activite) REFERENCES domaine_activite(Id_domaine_activite),
    FOREIGN KEY(Id_type_client) REFERENCES type_client(Id_type_client)
@@ -196,7 +196,7 @@ CREATE TABLE activite(
    Id_projet INTEGER NOT NULL,
    PRIMARY KEY(Id_activite),
    FOREIGN KEY(Id_liste_activite) REFERENCES liste_activite(Id_liste_activite),
-   FOREIGN KEY(Id_projet) REFERENCES projet(Id_projet)
+   FOREIGN KEY(Id_projet) REFERENCES projet(Id_projet) ON DELETE CASCADE
 );
 
 CREATE TABLE collaborateur(
@@ -258,5 +258,5 @@ CREATE TABLE intervient(
    PRIMARY KEY(Id_collaborateur, Id_fonction, Id_activite),
    FOREIGN KEY(Id_collaborateur) REFERENCES collaborateur(Id_collaborateur),
    FOREIGN KEY(Id_fonction) REFERENCES fonction(Id_fonction),
-   FOREIGN KEY(Id_activite) REFERENCES activite(Id_activite)
+   FOREIGN KEY(Id_activite) REFERENCES activite(Id_activite) ON DELETE CASCADE
 );

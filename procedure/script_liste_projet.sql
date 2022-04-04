@@ -12,8 +12,6 @@ RETURN QUERY SELECT projet.libelle_court, projet.date_reelle_fin from projet  wh
 END;
 $$
 LANGUAGE plpgsql;
-
-
 --call function 
 select liste_projet();
 

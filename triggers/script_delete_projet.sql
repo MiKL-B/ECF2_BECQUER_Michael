@@ -1,22 +1,22 @@
---TODO
---Triggers de suppresion
---
+
 --table projet
 -- Ne pas supprimer un projet si la date réelle de fin du projet est inférieure à 2 mois par rapport à la date du jour.
--- IF NEW.date_reelle_fin > 2mois par rapport date du jour
--- delete
---current_date 
---current_timestamp pour date et heure
+--drop
 drop function if exists delete_projet() cascade;
 drop trigger if exists delete_projet on projet cascade;
+--create function
 CREATE OR REPLACE FUNCTION delete_projet()
 RETURNS TRIGGER AS 
 $$
 BEGIN
+IF OLD.date_reelle_fin::date - current_date::date < 2 THEN
+RAISE EXCEPTION 'ERROR proj inf a 2 mois';
+END IF;
+return OLD;
 END;
 $$
 LANGUAGE plpgsql;
-
-CREATE TRIGGER delete_projet AFTER DELETE ON projet
+--create trigger
+CREATE TRIGGER delete_projet BEFORE DELETE ON projet
 FOR EACH ROW EXECUTE PROCEDURE delete_projet();
 
