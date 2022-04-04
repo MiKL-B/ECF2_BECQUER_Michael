@@ -1,4 +1,3 @@
-
 --table projet
 -- Ne pas supprimer un projet si la date réelle de fin du projet est inférieure à 2 mois par rapport à la date du jour.
 --drop

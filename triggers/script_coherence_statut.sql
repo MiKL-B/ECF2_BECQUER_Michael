@@ -1,13 +1,9 @@
---TODO
 --Triggers de mise a jour
 --Table personnel
 --Vérifier la cohérence du code statut,
 --Passages possibles de :
 -- - S (stagiaire) à D (CDD) ou I (CDI),
 -- - D (CDD) à I (CDI).
---
--- 3 --> 2 --> ou 1
--- 2 --> 1
 --drop
 drop function if exists coherence_statut() cascade;
 drop trigger if exists coherence_statut on collaborateur cascade;
