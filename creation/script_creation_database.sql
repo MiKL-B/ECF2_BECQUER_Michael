@@ -1,3 +1,34 @@
+--script de création
+--drop & create database
+DROP DATABASE if exists abi;
+CREATE DATABASE abi;
+--drop des tables 
+drop table if exists intervient cascade;
+drop table if exists contact_projet cascade;
+drop table if exists a_des_infos cascade;
+drop table if exists langage_developpement cascade;
+drop table if exists information_technique cascade;
+drop table if exists collaborateur cascade;
+drop table if exists document_associe cascade;
+drop table if exists retour_experience cascade;
+drop table if exists client cascade;
+drop table if exists projet cascade;
+drop table if exists activite cascade;
+drop table if exists raison_sociale_client cascade;
+drop table if exists liste_activite cascade;
+drop table if exists information_commerciale cascade;
+drop table if exists etat_civil cascade;
+drop table if exists sexe cascade;
+drop table if exists statut cascade;
+drop table if exists nature cascade;
+drop table if exists domaine_activite cascade;
+drop table if exists type_client cascade;
+drop table if exists cycle_vie_projet cascade;
+drop table if exists type_projet cascade;
+drop table if exists secteur_activite cascade;
+drop table if exists fonction cascade;
+
+--create table
 CREATE TABLE fonction(
    Id_fonction SERIAL,
    nom_fonction VARCHAR(15) ,

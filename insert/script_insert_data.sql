@@ -77,26 +77,35 @@ INSERT INTO secteur_activite(nom_secteur_activite) VALUES ('production');
 INSERT INTO secteur_activite(nom_secteur_activite) VALUES ('achat');
 
 --collaborateur
-INSERT INTO collaborateur (nom_prenom,remuneration,id_etat_civil,id_sexe,id_statut,id_fonction) VALUES('michel',2000,1,1,1,1);
-INSERT INTO collaborateur(nom_prenom,remuneration,id_etat_civil,id_sexe,id_statut,id_fonction,date_embauche)
-VALUES ('michmich',2000,1,1,1,1,'02/02/2000');
---activite-v-2
+INSERT INTO collaborateur (nom_prenom,remuneration,id_etat_civil,id_sexe,id_statut,id_fonction,adresse1,ville,codePostal,telephone,date_embauche,date_fin_contrat) 
+VALUES('michel',2000,1,1,1,1,'1 rue de pompey','pompey','54000','0102030405','02/03/2010','04/03/2019');
+INSERT INTO collaborateur (nom_prenom,remuneration,id_etat_civil,id_sexe,id_statut,id_fonction,adresse1,ville,codePostal,telephone,date_embauche) 
+VALUES('paul',1000,1,1,2,2,'2 rue de frouard','frouard','54500','0607080901','01/02/2012');
+
+--projet
+--renverra erreur car date prevue début > date prevue fin
+INSERT INTO projet(code_projet,libelle_court,id_secteur_activite,date_prevue_debut,date_prevue_fin,id_cycle_vie_projet,id_type_projet,nb_collab_max,date_reelle_debut,date_reelle_fin)
+VALUES ('1234','premier',1,'02/02/2019','03/03/2018',1,1,4,'01/04/2010','02/02/2021');
+
+INSERT INTO projet(code_projet,libelle_court,id_secteur_activite,date_prevue_debut,date_prevue_fin,id_cycle_vie_projet,id_type_projet,nb_collab_max,date_reelle_debut)
+VALUES ('5678','deux',1,'04/05/2016','04/04/2018',1,1,6,'01/04/2012');
+INSERT INTO projet(libelle_court,id_secteur_activite,date_prevue_debut,date_prevue_fin,id_cycle_vie_projet,id_type_projet,nb_collab_max,date_reelle_debut,date_reelle_fin)
+VALUES ('trois',1,'04/05/2016','04/04/2018',1,1,6,'01/04/2012','02/03/2013');
+INSERT INTO projet(libelle_court,id_secteur_activite,date_prevue_debut,date_prevue_fin,id_cycle_vie_projet,id_type_projet,nb_collab_max,date_reelle_debut,date_reelle_fin)
+VALUES ('quatre',1,'04/05/2016','04/04/2018',1,1,6,'01/04/2012','02/03/2021');
+--activite
 INSERT INTO activite(id_liste_activite,id_projet)
 VALUES (1,2);
-
---projet-v-2
-INSERT INTO projet(libelle_court,id_secteur_activite,date_prevue_debut,date_prevue_fin,id_cycle_vie_projet,id_type_projet)
-VALUES ('test',1,'02/02/2019','03/03/2018',1,1);
-INSERT INTO projet(libelle_court,id_secteur_activite,date_reelle_fin,id_cycle_vie_projet,id_type_projet) 
-VALUES ('pro',1,'04/04/2020',1,1);
-
---intervient-v-2
-INSERT INTO intervient(id_collaborateur, id_fonction,id_activite,date_debut_intervention,date_fin_intervention) VALUES (1,2,3,'02/02/2020','03/03/2022');
-INSERT INTO intervient(id_collaborateur, id_fonction,id_activite,date_debut_intervention,date_fin_intervention) VALUES (1,2,3,'04/03/2018','04/05/2019');
+INSERT INTO activite(id_liste_activite,id_projet)
+VALUES (2,2);
+--intervient
+INSERT INTO intervient(id_collaborateur, id_fonction,id_activite,date_debut_intervention,date_fin_intervention) VALUES (1,2,1,'02/02/2020','03/03/2022');
+INSERT INTO intervient(id_collaborateur, id_fonction,id_activite,date_debut_intervention,date_fin_intervention) VALUES (1,2,2,'04/03/2018','04/05/2019');
 --client
-INSERT INTO client(num_client,id_type_client,id_raison_sociale_client,id_domaine_activite,CA,id_projet,id_nature) 
-VALUES ('test',1,1,1,1000,2,1);
-INSERT INTO client(num_client,id_type_client,id_raison_sociale_client,id_domaine_activite,CA,id_projet,id_nature) 
-VALUES ('test',1,1,1,1000000,2,1);
-INSERT INTO client(num_client,id_type_client,id_raison_sociale_client,id_domaine_activite,CA,id_projet,id_nature) 
-VALUES ('test',1,1,1,1000001,2,1);
+INSERT INTO client(id_type_client,id_raison_sociale_client,id_domaine_activite,CA,id_projet,id_nature) 
+VALUES (1,1,1,1000,2,1);
+INSERT INTO client(id_type_client,id_raison_sociale_client,id_domaine_activite,CA,id_projet,id_nature) 
+VALUES (1,1,1,1000000,2,1);
+--renverra erreur car CA > 1 million
+INSERT INTO client(id_type_client,id_raison_sociale_client,id_domaine_activite,CA,id_projet,id_nature) 
+VALUES (1,1,1,1000001,2,1);
