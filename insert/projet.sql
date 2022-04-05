@@ -25,4 +25,3 @@ insert into projet (libelle_court, libelle_long, nb_collab_max, charge_estimee_g
 insert into projet (libelle_court, libelle_long, nb_collab_max, charge_estimee_globale, commentaire,id_cycle_vie_projet,id_type_projet,id_secteur_activite,date_prevue_debut,date_prevue_fin) values ('Ewing', 'Instructure, Inc.', 5, 14, 'eget nunc donec quis orci',1,1,1,'05/04/2022','05/10/2022');
 --renverra une erreur si date prevue debut > date prevue fin
 insert into projet (libelle_court, libelle_long, nb_collab_max, charge_estimee_globale, commentaire,id_cycle_vie_projet,id_type_projet,id_secteur_activite,date_prevue_debut,date_prevue_fin) values ('Ewing', 'Instructure, Inc.', 5, 14, 'eget nunc donec quis orci',1,1,1,'05/05/2022','04/04/2010');
-

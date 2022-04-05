@@ -1,5 +1,3 @@
-
-
 INSERT INTO intervient(id_collaborateur,id_fonction,id_activite,date_debut_intervention,date_fin_intervention) VALUES (1,1,1,'04/04/2022','06/07/2022');
 INSERT INTO intervient(id_collaborateur,id_fonction,id_activite,date_debut_intervention,date_fin_intervention) VALUES (2,2,2,'04/04/2022','06/07/2022');
 INSERT INTO intervient(id_collaborateur,id_fonction,id_activite,date_debut_intervention,date_fin_intervention) VALUES (3,3,3,'04/04/2022','06/07/2022');
