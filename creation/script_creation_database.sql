@@ -130,7 +130,7 @@ CREATE TABLE outils_developpement(
 
 CREATE TABLE projet(
    Id_projet SERIAL,
-   code_projet VARCHAR(4) ,
+   code_projet VARCHAR(4) DEFAULT f_year_id() ,
    libelle_court VARCHAR(10) ,
    libelle_long VARCHAR(50) ,
    nb_collab_max INTEGER,

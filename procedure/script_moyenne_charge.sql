@@ -4,11 +4,11 @@
 drop function if exists moyenne_charge();
 --create
 CREATE OR REPLACE function moyenne_charge()
-RETURNS TABLE (charge_estimee_globale integer)
+RETURNS TABLE (charge_estimee_globale numeric)
 AS
 $$
 BEGIN
-RETURN QUERY select projet.charge_estimee_globale from projet where projet.date_reelle_fin IS NOT NULL;
+RETURN QUERY select AVG(projet.charge_estimee_globale) from projet where projet.date_reelle_fin IS NULL;
 END;
 $$
 LANGUAGE plpgsql;
