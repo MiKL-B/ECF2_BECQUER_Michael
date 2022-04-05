@@ -24,3 +24,25 @@ $$
 LANGUAGE plpgsql;
 --call function
 select liste_intervention();
+
+
+-- drop procedure if exists test_inter();
+-- CREATE OR REPLACE PROCEDURE test_inter()
+-- AS
+-- $$
+-- DECLARE
+-- idact int;
+-- nom varchar;
+-- func varchar;
+-- debut date;
+-- fin date;
+-- BEGIN
+-- select activite.id_activite into idact, collaborateur.nom_prenom   ,func,debut,fin from intervient
+-- inner join collaborateur on intervient.id_collaborateur = collaborateur.id_collaborateur
+-- inner join fonction on intervient.id_fonction = fonction.id_fonction
+-- inner join activite on intervient.id_activite = activite.id_activite;
+-- END;
+-- $$
+-- LANGUAGE plpgsql;
+
+-- call test_inter();
