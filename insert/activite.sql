@@ -1,0 +1,11 @@
+INSERT INTO activite(id_liste_activite,id_projet) VALUES (1,1);
+INSERT INTO activite(id_liste_activite,id_projet) VALUES (2,2);
+INSERT INTO activite(id_liste_activite,id_projet) VALUES (3,3);
+INSERT INTO activite(id_liste_activite,id_projet) VALUES (4,4);
+INSERT INTO activite(id_liste_activite,id_projet) VALUES (5,5);
+INSERT INTO activite(id_liste_activite,id_projet) VALUES (6,6);
+INSERT INTO activite(id_liste_activite,id_projet) VALUES (7,7);
+INSERT INTO activite(id_liste_activite,id_projet) VALUES (8,8);
+INSERT INTO activite(id_liste_activite,id_projet) VALUES (9,9);
+INSERT INTO activite(id_liste_activite,id_projet) VALUES (10,10);
+INSERT INTO activite(id_liste_activite,id_projet) VALUES (1,11);

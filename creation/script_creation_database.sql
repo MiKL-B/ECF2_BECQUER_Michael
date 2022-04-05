@@ -3,17 +3,18 @@
 DROP DATABASE if exists abi;
 CREATE DATABASE abi;
 --drop des tables 
+
 drop table if exists intervient cascade;
-drop table if exists contact_projet cascade;
+drop table if exists possede_document cascade;
 drop table if exists a_des_infos cascade;
-drop table if exists langage_developpement cascade;
-drop table if exists information_technique cascade;
+drop table if exists a_des_infos_technique cascade;
 drop table if exists collaborateur cascade;
-drop table if exists document_associe cascade;
+drop table if exists activite cascade;
+drop table if exists information_technique cascade;
 drop table if exists retour_experience cascade;
 drop table if exists client cascade;
 drop table if exists projet cascade;
-drop table if exists activite cascade;
+drop table if exists outils_developpement cascade;
 drop table if exists raison_sociale_client cascade;
 drop table if exists liste_activite cascade;
 drop table if exists information_commerciale cascade;
@@ -25,6 +26,8 @@ drop table if exists domaine_activite cascade;
 drop table if exists type_client cascade;
 drop table if exists cycle_vie_projet cascade;
 drop table if exists type_projet cascade;
+drop table if exists document_associe cascade;
+drop table if exists langage_developpement cascade;
 drop table if exists secteur_activite cascade;
 drop table if exists fonction cascade;
 
@@ -57,7 +60,8 @@ CREATE TABLE document_associe(
 
 CREATE TABLE type_projet(
    Id_type_projet SERIAL,
-   nom_type_projet VARCHAR(1) ,
+   label_type_projet VARCHAR(1) ,
+   nom_type_projet VARCHAR(50),
    PRIMARY KEY(Id_type_projet)
 );
 
@@ -69,7 +73,7 @@ CREATE TABLE cycle_vie_projet(
 
 CREATE TABLE type_client(
    Id_type_client SERIAL,
-   label_type_client VARCHAR(1) ,
+   label_type_client VARCHAR(50) ,
    PRIMARY KEY(Id_type_client)
 );
 
@@ -201,7 +205,7 @@ CREATE TABLE activite(
 
 CREATE TABLE collaborateur(
    Id_collaborateur SERIAL,
-   matricule VARCHAR(4) ,
+   matricule VARCHAR(4) default nextval('seq_matricule') ,
    nom_prenom VARCHAR(40) ,
    adresse1 VARCHAR(25) ,
    adresse2 VARCHAR(25) ,

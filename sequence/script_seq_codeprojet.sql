@@ -1,3 +1,4 @@
+drop function if exists f_year_id();
 --sequence
 CREATE OR REPLACE FUNCTION f_year_id(y text = to_char(now(), 'YY'))
   RETURNS text AS
@@ -15,4 +16,5 @@ END LOOP;
 
 END
 $func$ LANGUAGE plpgsql VOLATILE;
+--select
 SELECT f_year_id();
